@@ -61,7 +61,17 @@ const ProductPage = (props) => {
                      <span className='lead'>{product.name}</span>
                   </ListGroup.Item>
                   <ListGroup.Item>
-                     <span className='h4'>Brand: {product.brand}</span>
+                     <span className='h4'>{product.brand}</span>
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                     Released -
+                     <span>
+                        {new Date(`${product.releaseDate}`).toLocaleDateString('sq-AL', {
+                           year: 'numeric',
+                           month: '2-digit',
+                           day: '2-digit',
+                        })}
+                     </span>
                   </ListGroup.Item>
                   <ListGroup.Item>
                      <Rating value={product.rating} text={`${product.numReviews} reviews`} />

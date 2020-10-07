@@ -5,6 +5,7 @@ const usePagination = (data, itemsPerPage, displayPages) => {
    const [startPage, setStartPage] = useState(1);
    const [endPage, setEndPage] = useState(displayPages);
    const maxPage = Math.ceil(data.length / itemsPerPage);
+   const [items, setItems] = useState(data);
 
    const currentData = () => {
       const begin = (currentPage - 1) * itemsPerPage;
@@ -61,7 +62,16 @@ const usePagination = (data, itemsPerPage, displayPages) => {
       }
    };
 
-   return { next, prev, jump, currentData, currentPage, maxPage, startPage, endPage };
+   return {
+      next,
+      prev,
+      jump,
+      currentData,
+      currentPage,
+      maxPage,
+      startPage,
+      endPage,
+   };
 };
 
 export default usePagination;

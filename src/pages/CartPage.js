@@ -9,6 +9,8 @@ export const CartPage = (props) => {
    const { state, productInCart, increase, decrease, removeProduct } = useContext(CartContext);
    const { cartItems, itemCount, total } = state;
 
+   console.log(cartItems);
+
    const handleIncrease = (product, size) => {
       increase({ product, size });
    };
@@ -38,8 +40,8 @@ export const CartPage = (props) => {
                   </Message>
                ) : (
                   <ListGroup variant='flush'>
-                     {cartItems.map((item) => (
-                        <ListGroup.Item>
+                     {cartItems.map((item, index) => (
+                        <ListGroup.Item key={index}>
                            <Row>
                               <Col md={2}>
                                  <Image

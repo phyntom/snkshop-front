@@ -1,49 +1,33 @@
 import React from 'react';
-import { Pagination } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 
-const Paginator = (props) => {
-   const {
-      next,
-      prev,
-      jump,
-      currentPage,
-      maxPage,
-      startPage,
-      currentData,
-      endPage,
-      pageSize,
-   } = props;
+const Paginator = ({ itemsCount, pageSize, currentPage, onPageChange }) => {
+   const pagesCount = Math.ceil(itemsCount / pageSize);
 
-   let pages = [];
-   pageSize >= currentData.length
-      ? (pages = _.range(startPage, endPage))
-      : (pages = _.range(startPage, endPage + 1));
+   if (pagesCount === 1) return null;
+   const pages = _.range(1, pagesCount + 1);
 
    return (
-      <Pagination>
-         {currentPage > 1 ? <Pagination.Prev onClick={() => prev()} /> : ''}
-         {pages.map((page) => (
-            <Pagination.Item active={page === currentPage} key={page} onClick={() => jump(page)}>
-               {page}
-            </Pagination.Item>
-         ))}
-         {currentPage !== maxPage ? <Pagination.Next onClick={() => next()} /> : ''}
-      </Pagination>
+      <nav>
+         <ul className='pagination'>
+            {pages.map((page) => (
+               <li key={page} className={page === currentPage ? 'page-item active' : 'page-item'}>
+                  <button className='page-link' onClick={() => onPageChange(page)}>
+                     {page}
+                  </button>
+               </li>
+            ))}
+         </ul>
+      </nav>
    );
 };
 
-export default Paginator;
+Paginator.propTypes = {
+   itemsCount: PropTypes.number.isRequired,
+   pageSize: PropTypes.number.isRequired,
+   currentPage: PropTypes.number.isRequired,
+   onPageChange: PropTypes.func.isRequired,
+};
 
-{
-   /* {currentPage > displayPages ? (
-            <>
-               <Pagination.Item active={maxPage === 1} onClick={() => jump(1)}>
-                  {1}
-               </Pagination.Item>
-               <Pagination.Ellipsis />
-            </>
-         ) : (
-            ''
-         )} */
-}
+export default Paginator;
