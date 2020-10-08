@@ -1,4 +1,57 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Sneaker City
+
+Sneaker City is a brand new online-only store for sneaker enthusiasts.
+
+-  Easy to easy to use
+-  Decent look and feel
+-  Done for demo purpose
+
+# Features!
+
+-  List items and item paginations
+-  Search items based on multiple criteria
+   -- product name
+   -- releaseDate
+   -- brand name
+   -- description
+-  Select sneaker based in size
+-  Add quantity per size availability
+-  Add to cart
+-  Cart Review
+   -- Increase or decrease quantity in cart
+   -- Remove items from the cart
+-  Login and Register
+-  Logout
+   You can also:
+
+## Tech
+
+Sneaker City is build using a number of open source projects to work properly:
+
+-  [ReactJS] - HTML enhanced for web apps!
+-  [Axios] - awesome web-based text editor
+-  [React-Bootrap] - A set of react ui component base on boostrap. Fast and easy to extend.
+-  [Twitter Bootstrap] - great UI boilerplate for modern web apps
+-  [Node.js] - evented I/O for the backend
+-  [yarn] - javascript yarn package manager like npm
+-  [React-Router-Dom] - a package used to handle routing in react.js application
+-  [Context Api]- context api is built-in function for managing state in React. Used by some to replace the popular libray called Redux
+
+## Running the application
+
+To run this application you will need to make sure the backend is running too. Since all the data will be server from there. So clone both applications from the following repository and follow the instruction of each. Another requirement is to make sure you have nodejs latest( node10+ ) version installed on your local machine.You can check the version by issuing the command **node -v**.
+
+1. #### Backend https://github.com/phyntom/snkshop-backend
+       1. git clone https://github.com/phyntom/snkshop-frontend.git
+       2. cd snkshop-frontend
+       3. npm install
+       4. touch .env
+       6. echo "NODE_ENV=developpment \nPORT=6000\nDB_URI=mongodb://127.0.0.1:27017/snkshop?poolSize=20\nJWT_SECRET_KEY=snkshop20101156" >> .env
+       7. node seeder.js -d
+       8. node seeder.js -im
+       9. npm run start
+
+Prior to the following process you will need to change some lines in package.json file in order to allow your front-end to query the backend. Find the **proxy** entry in package.json and replace by URL on which the backend will be running. If the backend is running on port 6000 no change needed. 2. ### Frontend https://github.com/phyntom/snkshop-frontend/ 1. git clone https://github.com/phyntom/snkshop-frontend.git 2. cd snkshop-frontend 3. npm install 4. npm yarn start
 
 ## Available Scripts
 
@@ -26,24 +79,6 @@ The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
 
