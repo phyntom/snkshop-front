@@ -8,7 +8,7 @@ Sneaker City is a brand new online-only store for sneaker enthusiasts.
 
 ## HomePage ( Product List Page)
 
-![image](https://drive.google.com/uc?export=view&id=1IHGuHEkA-w26-sIH0snhJj-GGIXSvawX)
+![image](https://drive.google.com/uc?export=view&id=1oZsk4Y8bjbPyz3Ul25bkPjzQLbfw92B7)
 
 ### Product Details
 
