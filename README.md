@@ -53,6 +53,8 @@ To run this application you will need to make sure the backend is running too. S
 
 Prior to the following process you will need to change some lines in package.json file in order to allow your front-end to query the backend. Find the **proxy** entry in package.json and replace by URL on which the backend will be running. If the backend is running on port 6000 no change needed. 2. ### Frontend https://github.com/phyntom/snkshop-frontend/ 1. git clone https://github.com/phyntom/snkshop-frontend.git 2. cd snkshop-frontend 3. npm install 4. npm yarn start
 
+Prior to the following process you will need to change some lines in package.json file in order to allow your front-end to query the backend. Find the **proxy** entry in package.json and replace by URL on which the backend will be running. If the backend is running on port 6000 no change needed. 2. ### Frontend https://github.com/phyntom/snkshop-frontend/ 1. git clone https://github.com/phyntom/snkshop-frontend.git 2. cd snkshop-frontend 3. npm install 4. npm yarn start
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -77,26 +79,6 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
 
 ### `yarn build` fails to minify
 
