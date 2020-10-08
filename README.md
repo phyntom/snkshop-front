@@ -6,6 +6,18 @@ Sneaker City is a brand new online-only store for sneaker enthusiasts.
 -  Decent look and feel
 -  Done for demo purpose
 
+## HomePage ( Product List Page)
+
+![image](https://drive.google.com/uc?export=view&id=1G-KfbgxTUli4m2hjCqV7iBH4UQh7jQeh)
+
+### Product Details
+
+![image](https://drive.google.com/uc?export=view&id=10vBFQiLZXh57nsvsN8atzuCcYSFGazn0)
+
+### Cart
+
+![image](https://drive.google.com/open?id=1IHGuHEkA-w26-sIH0snhJj-GGIXSvawX)
+
 # Features!
 
 -  List items and item paginations
@@ -42,8 +54,8 @@ Sneaker City is build using a number of open source projects to work properly:
 To run this application you will need to make sure the backend is running too. Since all the data will be server from there. So clone both applications from the following repository and follow the instruction of each. Another requirement is to make sure you have nodejs latest( node10+ ) version installed on your local machine.You can check the version by issuing the command **node -v**.
 
 1. #### Backend https://github.com/phyntom/snkshop-backend
-   1. git clone https://github.com/phyntom/snkshop-frontend.git
-   2. cd snkshop-frontend
+   1. git clone https://github.com/phyntom/snkshop-backend.git
+   2. cd snkshop-backend
    3. npm install
    4. touch .env
    5. echo "NODE_ENV=developpment \nPORT=6000\nDB_URI=mongodb://127.0.0.1:27017/snkshop?poolSize=20\nJWT_SECRET_KEY=snkshop20101156" >> .env
