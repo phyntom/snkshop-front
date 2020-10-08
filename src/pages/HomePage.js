@@ -9,7 +9,7 @@ const HomeScreen = (props) => {
    const [searchKey, setSearchKey] = useState('');
    const [currentPage, setCurrentPage] = useState(1);
    const [items, setItems] = useState([]);
-   const [pageSize, setPageSize] = useState(6);
+   const [pageSize, setPageSize] = useState(10);
 
    useEffect(() => {
       if (products.length > 0) {
