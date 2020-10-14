@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Link } from 'react-router-dom';
 import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
 import { CartContext } from '../context/CartContext';
 import { StoreContext } from '../context/StoreContext';
@@ -24,10 +23,13 @@ const Header = (props) => {
                <Navbar.Toggle aria-controls='basic-navbar-nav' />
                <Navbar.Collapse id='basic-navbar-nav'>
                   <Nav className='mr-auto'>
-                     <LinkContainer to={`/${'category=women'}`}>
+                     <LinkContainer to={`/home`}>
+                        <Nav.Link>All</Nav.Link>
+                     </LinkContainer>
+                     <LinkContainer to={`/home?category=women`}>
                         <Nav.Link>Women</Nav.Link>
                      </LinkContainer>
-                     <LinkContainer to={`/${'category=mem'}`}>
+                     <LinkContainer to={`/home?category=men`}>
                         <Nav.Link>Men</Nav.Link>
                      </LinkContainer>
                   </Nav>

@@ -11,15 +11,8 @@ const ProductPage = (props) => {
    const [qty, setQty] = useState(1);
    const [size, setSize] = useState('');
    const [qtyInSize, setQtyInSize] = useState(1);
-   // const { fetchProductById } = useContext(StoreContext);
-   const { addProduct } = useContext(CartContext);
 
-   // const fetchSelectedProduct = () => {
-   //    const selectedProduct = fetchProductById(id);
-   //    const initSize = selectedProduct.variants[0].quantity;
-   //    setQtyInSize(initSize);
-   //    setProduct(selectedProduct);
-   // };
+   const { addProduct } = useContext(CartContext);
 
    const handleSelectSize = (selectedSize) => {
       const sizeQty = product.variants.find((item) => item.size === selectedSize);
@@ -28,11 +21,8 @@ const ProductPage = (props) => {
    };
 
    const handleAddProduct = (currentProduct) => {
-      console.log(qty);
-      addProduct({ currentProduct, size, qty });
+      addProduct({ currentProduct, size, quantity: qty });
    };
-
-   // useEffect(fetchSelectedProduct, []);
 
    useEffect(() => {
       const fetchSingleProduct = async () => {
@@ -44,11 +34,11 @@ const ProductPage = (props) => {
          setQtyInSize(initQtyInSize);
       };
       fetchSingleProduct();
-   }, []);
+   }, [id]);
 
    return (
       <>
-         <Link className='btn btn-dark my-3' to='/'>
+         <Link className='btn btn-dark my-3' to='/home'>
             Go Back
          </Link>
          <Row>

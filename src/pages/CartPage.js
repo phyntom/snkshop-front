@@ -6,21 +6,19 @@ import Message from '../components/Message';
 // import { StoreContext } from '../context/StoreContext';
 
 export const CartPage = (props) => {
-   const { state, productInCart, increase, decrease, removeProduct } = useContext(CartContext);
+   const { state, increase, decrease, removeProduct } = useContext(CartContext);
    const { cartItems, itemCount, total } = state;
 
-   console.log(cartItems);
-
-   const handleIncrease = (product, size) => {
-      increase({ product, size });
+   const handleIncrease = (id, size) => {
+      increase({ _id: id, size });
    };
 
-   const handleDecrease = (product, size) => {
-      decrease({ product, size });
+   const handleDecrease = (id, size) => {
+      decrease({ _id: id, size });
    };
 
-   const handleRemove = (product, size) => {
-      removeProduct({ product, size });
+   const handleRemove = (id, size) => {
+      removeProduct({ _id: id, size });
    };
 
    const handleCheckout = () => {
@@ -44,17 +42,10 @@ export const CartPage = (props) => {
                         <ListGroup.Item key={index}>
                            <Row>
                               <Col md={2}>
-                                 <Image
-                                    src={productInCart(item._id).image}
-                                    alt={productInCart(item._id).name}
-                                    fluid
-                                    rounded
-                                 />
+                                 <Image src={item.image} alt={item.name} fluid rounded />
                               </Col>
                               <Col md={2}>
-                                 <Link to={`/product/${item._id}`}>
-                                    {productInCart(item._id).name}
-                                 </Link>
+                                 <Link to={`/product/${item._id}`}>{item.name}</Link>
                               </Col>
                               <Col md={2}>
                                  ${item.price} x {item.quantity}
@@ -67,25 +58,21 @@ export const CartPage = (props) => {
                                  <Button
                                     type='button'
                                     variant='light'
-                                    onClick={() =>
-                                       handleIncrease(productInCart(item._id), item.size)
-                                    }
+                                    onClick={() => handleIncrease(item._id, item.size)}
                                  >
                                     <i className='fas fa-plus' />
                                  </Button>
                                  <Button
                                     type='button'
                                     variant='light'
-                                    onClick={() =>
-                                       handleDecrease(productInCart(item._id), item.size)
-                                    }
+                                    onClick={() => handleDecrease(item._id, item.size)}
                                  >
                                     <i className='fas fa-minus' />
                                  </Button>
                                  <Button
                                     type='button'
                                     variant='light'
-                                    onClick={() => handleRemove(productInCart(item._id), item.size)}
+                                    onClick={() => handleRemove(item._id, item.size)}
                                  >
                                     <i className='fas fa-trash' />
                                  </Button>

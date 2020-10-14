@@ -6,11 +6,12 @@ import axios from 'axios';
 import { getInStorage } from '../utils/persistStorage';
 import Message from '../components/Message';
 import { StoreContext } from '../context/StoreContext';
+import Steps from '../components/Steps';
 
 export const LoginPage = (props) => {
    const [email, setEmail] = useState('');
    const [password, setPassword] = useState('');
-   const [error, setError] = useState('');
+   const [errorMsg, setErrorMsg] = useState('');
    const { updateSavedUser } = useContext(StoreContext);
    const userExist = getInStorage('user');
 
@@ -44,46 +45,52 @@ export const LoginPage = (props) => {
          updateSavedUser(userData);
          history.push(`/${redirect}`);
       } catch (error) {
-         if (error.response.data) setError(error.response.data.message);
-         else setError(error.message);
+         const message =
+            error.response && error.response.data.message
+               ? error.response.data.message
+               : error.message;
+         setErrorMsg(message);
       }
    };
 
    return (
-      <FormContainer>
-         <h3 className='my-5'>Sign In</h3>
-         {error && <Message variant='danger'>{error}</Message>}
-         <Form onSubmit={submitHandler}>
-            <Form.Group controlId='email'>
-               <Form.Label>Email Address</Form.Label>
-               <Form.Control
-                  type='email'
-                  placeholder='Enter email'
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-               ></Form.Control>
-            </Form.Group>
-            <Form.Group controlId='password'>
-               <Form.Label>Password</Form.Label>
-               <Form.Control
-                  type='password'
-                  placeholder='Enter password'
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-               ></Form.Control>
-            </Form.Group>
-            <Button type='submit' variant='primary'>
-               Sign In
-            </Button>
-            <Row className='py-3'>
-               <Col>
-                  New User ?{' '}
-                  <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>
-                     Register
-                  </Link>
-               </Col>
-            </Row>
-         </Form>
-      </FormContainer>
+      <>
+         <Steps step1 />
+         <FormContainer>
+            <h3 className='my-5'>Sign In</h3>
+            {errorMsg && <Message variant='danger'>{errorMsg}</Message>}
+            <Form onSubmit={submitHandler}>
+               <Form.Group controlId='email'>
+                  <Form.Label>Email Address</Form.Label>
+                  <Form.Control
+                     type='email'
+                     placeholder='Enter email'
+                     value={email}
+                     onChange={(e) => setEmail(e.target.value)}
+                  ></Form.Control>
+               </Form.Group>
+               <Form.Group controlId='password'>
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control
+                     type='password'
+                     placeholder='Enter password'
+                     value={password}
+                     onChange={(e) => setPassword(e.target.value)}
+                  ></Form.Control>
+               </Form.Group>
+               <Button type='submit' variant='primary'>
+                  Sign In
+               </Button>
+               <Row className='py-3'>
+                  <Col>
+                     New User ?{' '}
+                     <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>
+                        Register
+                     </Link>
+                  </Col>
+               </Row>
+            </Form>
+         </FormContainer>
+      </>
    );
 };

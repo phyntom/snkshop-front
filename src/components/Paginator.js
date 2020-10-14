@@ -2,19 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 
-const Paginator = ({ itemsCount, pageSize, currentPage, onPageChange }) => {
-   const pagesCount = Math.ceil(itemsCount / pageSize);
-
+const Paginator = ({ itemsCount, pagesCount, pageSize, currentPage, onPageChange }) => {
    if (pagesCount === 1) return null;
    const pages = _.range(1, pagesCount + 1);
+   console.log(pages);
 
    return (
       <nav>
          <ul className='pagination'>
             {pages.map((page) => (
                <li key={page} className={page === currentPage ? 'page-item active' : 'page-item'}>
-                  <button className='page-link' onClick={() => onPageChange(page)}>
-                     {page}
+                  <button className='page-link' onClick={(e) => onPageChange(page, e)}>
+                     {Number(page)}
                   </button>
                </li>
             ))}

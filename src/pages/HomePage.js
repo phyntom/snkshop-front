@@ -3,6 +3,7 @@ import Product from '../components/Product';
 import { Row, Col, Form, InputGroup, FormControl } from 'react-bootstrap';
 import { StoreContext } from '../context/StoreContext';
 import Paginator from '../components/Paginator';
+import Steps from '../components/Steps';
 
 const HomeScreen = (props) => {
    const { products } = useContext(StoreContext);
@@ -10,18 +11,29 @@ const HomeScreen = (props) => {
    const [currentPage, setCurrentPage] = useState(1);
    const [items, setItems] = useState([]);
    const [pageSize, setPageSize] = useState(10);
+   const [pagesCount, setPagesCount] = useState(0);
+   const { location } = props;
+
+   const category = location.search ? location.search.split('=')[1] : '';
 
    useEffect(() => {
-      if (products.length > 0) {
+      function loadProducts() {
          const data = [...products];
-         setItems(data.slice(0, pageSize));
+         setPagesCount(Math.ceil(products.length / 10));
+         setItems(data.slice(0, 10));
       }
+      loadProducts();
    }, [products]);
 
    const onSearch = (key) => {
-      let value = key;
+      const value = key;
       setSearchKey(value);
       let currentItems = [...products];
+      if (category) {
+         currentItems = currentItems.filter((product) => {
+            return product.category.toUpperCase() === category.toUpperCase();
+         });
+      }
       let filteredProducts = currentItems.filter((product) => {
          return (
             product.name.toUpperCase().includes(value.toUpperCase()) ||
@@ -31,26 +43,52 @@ const HomeScreen = (props) => {
             product.releaseDate.toUpperCase().includes(value.toUpperCase())
          );
       });
-      setItems(filteredProducts);
+      setPagesCount(Math.ceil(filteredProducts.length / pageSize));
+      setItems(filteredProducts.slice(0, 0 + pageSize));
    };
 
    const onPageChange = (page) => {
       let data = [...products];
       let offset = (page - 1) * pageSize;
       setCurrentPage(page);
-      setItems(data.slice(offset, offset + pageSize));
+      const result = data.slice(offset, offset + pageSize);
+      setItems(result);
+      console.log(offset);
+      console.log(offset + pageSize);
    };
 
    const onPageSizeChange = (size) => {
       let data = [...products];
       let offset = (currentPage - 1) * size;
       setPageSize(size);
-      setItems(data.slice(offset, offset + size));
+      const result = data.slice(offset, offset + size);
+      setPagesCount(Math.ceil(data.length / size));
+      setItems(result);
+      console.log(result);
    };
+
+   const filterHandler = (key) => {
+      const value = key;
+      let currentItems = [...products];
+      let filteredProducts = [];
+      if (!value) {
+         filteredProducts = [...products];
+      } else {
+         filteredProducts = currentItems.filter((product) => {
+            return product.category.toUpperCase() === value.toUpperCase();
+         });
+      }
+      setPagesCount(Math.ceil(filteredProducts.length / pageSize));
+      if (filteredProducts.length !== items.length) {
+         setItems(filteredProducts.slice(0, pageSize));
+      }
+   };
+
+   useEffect(filterHandler, [category]);
 
    return (
       <div>
-         <h3>Latest Product</h3>
+         <h3>Latest Products - {category}</h3>
          <Row className={'py-2'}>
             <Col md={4}>
                <InputGroup className='mb-2'>
@@ -80,7 +118,8 @@ const HomeScreen = (props) => {
                <Form.Control
                   as='select'
                   className={'select-pagination'}
-                  onChange={(e) => onPageSizeChange(e.target.value)}
+                  value={pageSize}
+                  onChange={(e) => onPageSizeChange(Number(e.target.value))}
                >
                   <option value={5}>5</option>
                   <option value={10}>10</option>
@@ -92,6 +131,7 @@ const HomeScreen = (props) => {
             <Col md={6}>
                <Paginator
                   itemsCount={products.length}
+                  pagesCount={pagesCount}
                   pageSize={pageSize}
                   currentPage={currentPage}
                   onPageChange={onPageChange}

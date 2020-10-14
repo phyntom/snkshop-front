@@ -13,6 +13,8 @@ import { LoginPage } from './pages/LoginPage';
 import { Register } from './pages/Register';
 import { Profile } from './pages/Profile';
 import ProtectedRoute from './components/ProtectedRoute';
+import { ShippingPage } from './pages/ShippingPage';
+import { CreateOrderPage } from './pages/CreateOrderPage';
 
 const App = () => {
    return (
@@ -27,6 +29,8 @@ const App = () => {
                         <Route path={'/home'} component={HomeScreen} />
                         <Route path='/login' component={LoginPage} />
                         <ProtectedRoute path='/profile' component={Profile} />
+                        <ProtectedRoute path='/shipping' component={ShippingPage} />
+                        <ProtectedRoute path='/createorder' component={CreateOrderPage} />
                         <Route path={'/register'} component={Register} />
                         <Route path={'/product/:id'} component={ProductPage} />
                         <Route path={'/cart'} component={CartPage} />

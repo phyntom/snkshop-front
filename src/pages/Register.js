@@ -13,6 +13,8 @@ export const Register = (props) => {
    const [error, setError] = useState('');
    const { updateSavedUser } = useContext(StoreContext);
 
+   console.log(props.location.search);
+
    const handleRegister = async (e) => {
       e.preventDefault();
       if (!password || password === '') {

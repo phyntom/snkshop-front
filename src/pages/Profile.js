@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Form, Button, Col, Row } from 'react-bootstrap';
 import { StoreContext } from '../context/StoreContext';
 import axios from 'axios';
-import FormContainer from '../components/FormContainer';
 import Message from '../components/FormContainer';
 
 export const Profile = (props) => {
@@ -34,7 +33,7 @@ export const Profile = (props) => {
          }
       };
       fetchProfile();
-   }, [existUser]);
+   });
 
    const handleUpdate = async (e) => {
       e.preventDefault();

@@ -10,11 +10,9 @@ export const StoreContextProvider = (props) => {
    const [products, setProducts] = useState([]);
    const [existUser, setExistUser] = useState(savedUser);
 
-   console.log(localStorage.getItem('user'));
-
    const fetchProducts = async () => {
       try {
-         const { data } = await axios.get('api/products');
+         const { data } = await axios.get('/api/products');
          setProducts(data);
       } catch (error) {
          console.log(error.message);

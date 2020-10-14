@@ -4,7 +4,7 @@ export const CartReducer = (state, action) => {
    switch (action.type) {
       case 'INCREASE':
          const increasedIndex = state.cartItems.findIndex(
-            (item) => item._id === action.payload.product._id && item.size === action.payload.size
+            (item) => item._id === action.payload._id && item.size === action.payload.size
          );
          state.cartItems[increasedIndex].quantity++;
          return {
@@ -14,7 +14,7 @@ export const CartReducer = (state, action) => {
          };
       case 'DECREASE':
          const decreasedIndex = state.cartItems.findIndex(
-            (item) => item._id === action.payload.product._id && item.size === action.payload.size
+            (item) => item._id === action.payload._id && item.size === action.payload.size
          );
          if (state.cartItems[decreasedIndex].quantity === 1) {
             state.cartItems.splice(decreasedIndex, 1);
@@ -39,9 +39,12 @@ export const CartReducer = (state, action) => {
          } else {
             state.cartItems.push({
                _id: action.payload.currentProduct._id,
+               image: action.payload.currentProduct.image,
                price: action.payload.currentProduct.price,
+               name: action.payload.currentProduct.name,
                size: action.payload.size,
-               quantity: action.payload.qty,
+               quantity: action.payload.quantity,
+               product: action.payload.currentProduct,
             });
          }
          return {
@@ -51,7 +54,7 @@ export const CartReducer = (state, action) => {
          };
       case 'REMOVE_PRODUCT':
          const removeIndex = state.cartItems.findIndex(
-            (item) => item._id === action.payload.product._id && item.size === action.payload.size
+            (item) => item._id === action.payload._id && item.size === action.payload.size
          );
          state.cartItems.splice(removeIndex, 1);
          return {
@@ -59,8 +62,21 @@ export const CartReducer = (state, action) => {
             cartItems: [...state.cartItems],
             ...sumItems(state.cartItems),
          };
+      case 'ADD_SHIPPING':
+         const shippingAddress = { ...action.payload };
+         saveInStorage('shippingAddress', shippingAddress);
+         return {
+            ...state,
+            shippingAddress,
+         };
+      case 'ADD_ORDER':
+         return {
+            ...state,
+         };
       default:
-         return;
+         return {
+            ...state,
+         };
    }
 };
 
